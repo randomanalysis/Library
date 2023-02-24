@@ -1,0 +1,12 @@
+
+
+body {
+    background-color: rgb(41, 75, 111);
+}
+
+.background {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
