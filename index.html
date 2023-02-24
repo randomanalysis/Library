@@ -13,12 +13,30 @@
             <h1>My Library</h1>
         </div>
 
-        <div class="addBook">
-            <button class="addBook" id="addBook">Add Book</button>
-        </div>
-
         <div class="library" id="book-display">
 
+        </div>
+
+        <button class="open-button" onclick="openForm()">Add Book</button>
+
+        <div class="form-popup" id="bookForm">
+            <form onsubmit="addBookFromForm()" class="form-container">
+                <h1>Add Book</h1>
+
+                <input type="text" placeholder="Enter title" name="title" required>
+
+                <input type="text" placeholder="Enter author name" name="author" required>
+
+                <input type="number" min="1" placeholder="Enter number of pages" name="pages" required>
+
+                <div class="readButton">
+                    <label for="read">Have you read this book?</label>
+                    <input type="checkbox" name="read" required>
+                </div>
+
+                <button type="submit" class="btn">Add Book</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+            </form>
         </div>
 
 
