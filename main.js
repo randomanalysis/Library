@@ -83,7 +83,7 @@ function displayBookAsCard(aBook) {
         bookRead.classList.add("book-not-read");
     }
     bookRead.onclick = function() {
-        updateReadStatus(this)
+        updateReadStatus(this);
     }
     bookRemove.textContent += "Remove";
     bookRemove.onclick = function() {
@@ -125,16 +125,16 @@ function removeBookCard(bookRemove) {
 }
 
 function updateReadStatus(bookRead) {
-    
-    if (bookRead.classList.contains("book-not-read")) {
-        bookRead.textContent = "Read";
-        bookRead.classList.remove("book-not-read");
-        bookRead.classList.add("book-read");
+
+    bookIndex = bookRead.parentNode.dataset.bookIndex;
+
+    if (myLibrary[bookIndex].read == true) {
+        myLibrary[bookIndex].read = false;
     } else {
-        bookRead.textContent = "Not Read";
-        bookRead.classList.remove("book-read");
-        bookRead.classList.add("book-not-read");
+        myLibrary[bookIndex].read = true;
     }
+
+    displayLibrary();
 }
 
 function bookFormSubmit() {
