@@ -68,6 +68,10 @@ function displayBookAsCard(aBook) {
     bookRead.classList.add("btn");
     bookRemove.classList.add("btn");
 
+    const bookIndex = myLibrary.indexOf(aBook);
+
+    bookCard.dataset.bookIndex = bookIndex;
+
     bookTitle.textContent += aBook.title;
     bookAuthor.textContent += aBook.author;
     bookPages.textContent += `${aBook.pages} pages`;
@@ -78,7 +82,13 @@ function displayBookAsCard(aBook) {
         bookRead.textContent += "Not Read";
         bookRead.classList.add("book-not-read");
     }
+    bookRead.onclick = function() {
+        updateReadStatus(this)
+    }
     bookRemove.textContent += "Remove";
+    bookRemove.onclick = function() {
+        removeBookCard(this);
+    };
 
     bookCard.appendChild(bookTitle);
     bookCard.appendChild(bookAuthor);
@@ -87,7 +97,6 @@ function displayBookAsCard(aBook) {
     bookCard.appendChild(bookRemove);
 
     booksDisplay.appendChild(bookCard);
-
 }
 
 function openForm() {
@@ -104,8 +113,29 @@ const getBookFromInput = () => {
     const pages = document.getElementById('pages').value
     const read = document.getElementById('read').checked
     return new Book(title, author, pages, read)
-  }
+}
 
+function removeBookCard(bookRemove) {
+
+    bookIndex = bookRemove.parentNode.dataset.bookIndex
+
+    myLibrary.splice(bookIndex, 1)
+
+    displayLibrary();
+}
+
+function updateReadStatus(bookRead) {
+    
+    if (bookRead.classList.contains("book-not-read")) {
+        bookRead.textContent = "Read";
+        bookRead.classList.remove("book-not-read");
+        bookRead.classList.add("book-read");
+    } else {
+        bookRead.textContent = "Not Read";
+        bookRead.classList.remove("book-read");
+        bookRead.classList.add("book-not-read");
+    }
+}
 
 function bookFormSubmit() {
     const newBook = getBookFromInput()
